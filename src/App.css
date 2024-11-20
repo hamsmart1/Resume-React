@@ -1,0 +1,165 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 500px;
+  height: 500px;
+  border: none;
+}
+
+.top-container {
+  background-color: #00a2ff; /* สีส้ม */
+  color: white;
+}
+
+.top-container h1 {
+  font-size: 5em;
+  text-align: center;
+  font-family: "Raleway";
+  font-weight: 100;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+
+.top-container h2 {
+  font-size: 2rem; /* ขนาดตัวอักษร */
+  font-weight: bold; 
+  font-family: "Raleway";
+  text-align: center;
+}
+
+.top-container p {
+  font-size: 1.5rem; 
+  font-family: "Raleway";
+  text-align: center;
+}
+
+.top-container a {
+  color: white; /* เปลี่ยนสีของลิงก์เป็นสีขาว */
+  text-decoration: none; /* ลบขีดเส้นใต้ */
+}
+
+.top-container a:hover {
+  color: #e0e0e0; /* เปลี่ยนสีลิงก์เป็นสีเทาเมื่อเลื่อนเมาส์ */
+}
+
+.banner {
+  background-color: #ff9800; /* สีของปุ่ม */
+  color: white; /* สีตัวอักษรในปุ่ม */
+  border: none; /* ไม่มีขอบ */
+  padding: 15px 30px; /* เว้นระยะภายในปุ่ม */
+  border-radius: 5px; /* มุมปุ่มโค้ง */
+  cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อชี้ไปที่ปุ่ม */
+  transition: background-color 0.3s; /* เปลี่ยนสีเมื่อเอาเมาส์ชี้ */
+}
+
+.banner:hover {
+  background-color: #e68900; /* สีของปุ่มเมื่อเอาเมาส์ชี้ */
+}
+
+.bottom-container {
+  margin-top: 40px; /* ระยะห่างด้านบน */
+  font-size: 1em;
+  text-align: center;
+  font-family: "Raleway";
+  font-weight: 100;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.em {
+  font-family: "Raleway";
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* สีพื้นหลัง */
+  color: white; /* สีตัวอักษร */
+  padding: 15px; /* ระยะห่างภายใน */
+  text-align: center; /* จัดกึ่งกลาง */
+  text-decoration: none; /* ลบขีดเส้นใต้ */
+  display: inline-block; /* ทำให้ปุ่มอยู่ในบรรทัดเดียวกัน */
+  margin: 4px 2px; /* ระยะห่างระหว่างปุ่ม */
+  cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อวางเมาส์ */
+  width: 150px; /* กำหนดความกว้างของปุ่ม */
+  height: 50px; /* กำหนดความสูงของปุ่ม */
+  border: none; /* ลบเส้นขอบ */
+  border-radius: 4px; /* มุมมน */
+}
+
+.bottom-container ul {
+  padding-left: 0;
+  list-style-position: none;
+  text-align: center;
+}
+
+.bottom-container {
+  padding: 20px;
+  padding-left: 0; /* ลบระยะห่างซ้ายของรายการ */
+  list-style-position: none; /* แสดงหมายเลขภายในกล่อง */
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.footer-link {
+  color: #ff9800;
+  text-decoration: underline;
+}
+
+@media (max-width: 575px) {
+  .profile-image {
+      width: 150px;
+      height: 150px;
+  }
+
+  .top-container h1 {
+      font-size: 1.5em;
+  }
+
+  .top-container h2 {
+      font-size: 1.2em;
+  }
+
+  .top-container p {
+      font-size: 1em;
+  }
+
+  .banner {
+      font-size: 0.8em; /* Make buttons smaller on small screens */
+      padding: 10px 20px;
+  }
+}
+
+@media (min-width: 576px) {
+  .profile-image {
+      width: 250px;
+      height: 250px;
+  }
+
+  .top-container h1 {
+      font-size: 3em;
+  }
+
+  .top-container h2 {
+      font-size: 1.5em;
+  }
+
+  .top-container p {
+      font-size: 1.2em;
+  }
+
+  .banner {
+      font-size: 1em;
+      padding: 12px 24px;
+  }
+}
+
