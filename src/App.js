@@ -1,85 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-  const [lang, setLang] = useState('th'); // Default to Thai language
-  const [activeTab, setActiveTab] = useState('experience');
+  const [lang, setLang] = useState('th');
+  const [activeSection, setActiveSection] = useState('about');
 
   const translations = {
     en: {
-      availableForHire: 'Ready to Collaborate',
       roleTitle: 'Software Developer (AI & Data)',
       major: 'Digital and Information Technology',
       faculty: 'Faculty of Engineering and Technology',
       institution: 'Panyapiwat Institute of Management [PIM]',
       phone: 'Phone',
       email: 'Email',
-      linkedin: 'LinkedIn Profile',
-      linktree: 'Linktree Portals',
+      linkedin: 'LinkedIn',
+      linktree: 'Linktree',
       downloadResume: 'Download Resume (PDF)',
-      tabExperience: '💼 Experience',
-      tabEducation: '🎓 Education',
-      tabProjects: '🚀 Projects',
-      tabSkills: '⚡ Skills',
-      tabDownloads: '📥 Documents',
-      experienceTitle: 'Professional Experience',
-      educationTitle: 'Education History',
+      navAbout: 'About',
+      navExperience: 'Experience',
+      navEducation: 'Education',
+      navProjects: 'Projects',
+      navSkills: 'Skills',
+      navDownloads: 'Documents',
+      experienceTitle: 'Work Experience',
+      educationTitle: 'Education',
       projectsTitle: 'Featured Projects',
       skillsTitle: 'Skills & Competencies',
-      downloadsTitle: 'Official Documents & Downloads',
-      downloadsDesc: 'Access and download verified copies of resumes, portfolios, and certifications. Sensitive records are request-only.',
+      downloadsTitle: 'Official Documents',
+      downloadsDesc: 'Access and download verified copies of resumes, portfolios, and certifications.',
       gpaxLabel: 'GPAX',
       outstanding: 'Outstanding Academic Standing',
       downloadBtnText: 'Download',
-      internshipSmart: 'Internship at Smarttelcoms Co., Ltd.',
-      internshipCP: 'Internship at CP ALL Public Company Limited',
-      levelProficient: 'Proficient',
-      levelIntermediate: 'Intermediate',
-      levelAdvanced: 'Advanced',
-      levelNative: 'Native Language',
-      levelGood: 'Good Command (CEFR C1)',
-      address: 'Bangkok, Thailand',
-      sourceCode: 'View Source',
       requestTrans: 'Request',
-      requestDoc: 'Request Academic Transcript',
+      sourceCode: 'Source Code',
+      address: 'Bangkok, Thailand',
+      aboutText: 'A dedicated Software Developer specializing in AI and Data engineering. Experienced in building computer vision systems, OCR pipelines, and web applications. Passionate about creating clean, highly performant code and automated systems.',
+      aboutTextTh: 'นักพัฒนาซอฟต์แวร์ที่มีความมุ่งมั่นและเชี่ยวชาญด้านวิศวกรรม AI และข้อมูล มีประสบการณ์ในการพัฒนาระบบคอมพิวเตอร์วิทัศน์ (Computer Vision), ระบบประมวลผลอักขระ (OCR) และเว็บแอปพลิเคชัน มุ่งเน้นการเขียนโค้ดที่สะอาด มีประสิทธิภาพ และการสร้างระบบอัตโนมัติ'
     },
     th: {
-      availableForHire: 'พร้อมร่วมสร้างสรรค์ผลงาน',
       roleTitle: 'นักพัฒนาซอฟต์แวร์ (AI & Data)',
       major: 'สาขาวิชาเทคโนโลยีดิจิทัลและสารสนเทศ',
       faculty: 'คณะวิศวกรรมศาสตร์และเทคโนโลยี',
       institution: 'สถาบันการจัดการปัญญาภิวัฒน์ [PIM]',
       phone: 'เบอร์โทรศัพท์',
       email: 'อีเมล',
-      linkedin: 'โปรไฟล์ LinkedIn',
-      linktree: 'ลิงก์รวมผลงาน Linktree',
+      linkedin: 'LinkedIn',
+      linktree: 'Linktree',
       downloadResume: 'ดาวน์โหลด Resume (PDF)',
-      tabExperience: '💼 ประสบการณ์',
-      tabEducation: '🎓 การศึกษา',
-      tabProjects: '🚀 ผลงานโครงการ',
-      tabSkills: '⚡ ทักษะ',
-      tabDownloads: '📥 เอกสารดาวน์โหลด',
+      navAbout: 'เกี่ยวกับ',
+      navExperience: 'ประสบการณ์',
+      navEducation: 'การศึกษา',
+      navProjects: 'ผลงานโครงการ',
+      navSkills: 'ทักษะความสามารถ',
+      navDownloads: 'เอกสารดาวน์โหลด',
       experienceTitle: 'ประสบการณ์การทำงาน',
       educationTitle: 'ประวัติการศึกษา',
       projectsTitle: 'โครงการและผลงานเด่น',
-      skillsTitle: 'ทักษะและความสามารถ',
-      downloadsTitle: 'เอกสารอย่างเป็นทางการและดาวน์โหลด',
-      downloadsDesc: 'เข้าถึงและดาวน์โหลดเอกสารยืนยันอย่างเป็นทางการ ทั้ง Resume, แฟ้มสะสมผลงาน (Portfolio) และใบรับรองภาษาอังกฤษ เอกสารสำคัญสามารถติดต่อขอได้ผ่านทางอีเมล',
+      skillsTitle: 'ทักษะและความชำนาญ',
+      downloadsTitle: 'เอกสารดาวน์โหลดอย่างเป็นทางการ',
+      downloadsDesc: 'เข้าถึงและดาวน์โหลด Resume, Portfolio และใบรับรองต่างๆ อย่างเป็นทางการ',
       gpaxLabel: 'เกรดเฉลี่ยสะสม (GPAX)',
       outstanding: 'ผลการเรียนดีเยี่ยมโดดเด่น',
       downloadBtnText: 'ดาวน์โหลด',
-      internshipSmart: 'ฝึกงานที่ บริษัท สมาร์ทเทลคอม จำกัด',
-      internshipCP: 'ฝึกงานที่ บริษัท ซีพี ออลล์ จำกัด (มหาชน)',
-      levelProficient: 'เชี่ยวชาญ',
-      levelIntermediate: 'ระดับกลาง',
-      levelAdvanced: 'ระดับสูง',
-      levelNative: 'ภาษาแม่',
-      levelGood: 'สื่อสารได้ดี (CEFR C1)',
-      address: 'กรุงเทพมหานคร, ประเทศไทย',
-      sourceCode: 'ดูโค้ดผลงาน',
       requestTrans: 'ขอเอกสาร',
-      requestDoc: 'ติดต่อขอใบแสดงผลการเรียน',
+      sourceCode: 'ดูโค้ดผลงาน',
+      address: 'กรุงเทพมหานคร, ประเทศไทย',
+      aboutText: 'A dedicated Software Developer specializing in AI and Data engineering. Experienced in building computer vision systems, OCR pipelines, and web applications. Passionate about creating clean, highly performant code and automated systems.',
+      aboutTextTh: 'นักพัฒนาซอฟต์แวร์ที่มีความมุ่งมั่นและเชี่ยวชาญด้านวิศวกรรม AI และข้อมูล มีประสบการณ์ในการพัฒนาระบบคอมพิวเตอร์วิทัศน์ (Computer Vision), ระบบประมวลผลอักขระ (OCR) และเว็บแอปพลิเคชัน มุ่งเน้นการเขียนโค้ดที่สะอาด มีประสิทธิภาพ และการสร้างระบบอัตโนมัติ'
     }
   };
 
@@ -88,7 +75,7 @@ const App = () => {
   const contactInfo = {
     name: 'Nonrawit Yodthong',
     email: 'hamsmart47@gmail.com',
-    phone: '(+66) 65-xxx-xxxx', // Enhanced phone number masking for privacy
+    phone: '(+66) 65-xxx-xxxx',
     linkedin: 'https://www.linkedin.com/in/nonrawit/',
     linktree: 'https://linktr.ee/Hammy_kun',
     profileImg: 'https://i.imgur.com/dQjdGnZ.jpg',
@@ -100,34 +87,28 @@ const App = () => {
       company: lang === 'en' ? 'Smarttelcoms Co., Ltd.' : 'บริษัท สมาร์ทเทลคอม จำกัด',
       role: lang === 'en' ? 'AI & DATA Intern' : 'นักศึกษาฝึกงานด้าน AI & DATA',
       duration: lang === 'en' ? 'JANUARY - MAY 2025' : 'มกราคม - พฤษภาคม 2568',
-      logo: '🏢',
       tasks: [
         {
-          title: lang === 'en' ? 'System Testing & Maintenance' : 'การทดสอบและบำรุงรักษาระบบ',
           desc: lang === 'en' 
             ? 'Tested and maintained an OCR system (Optical Character Recognition) to ensure high quality and functionality.'
             : 'ทดสอบและดูแลรักษาระบบ OCR (ระบบรู้จำอักขระด้วยแสง) เพื่อความถูกต้องและมีประสิทธิภาพสูงสุดในการใช้งาน',
         },
         {
-          title: lang === 'en' ? 'Data Management' : 'การจัดการข้อมูล',
           desc: lang === 'en'
             ? 'Prepared and labeled datasets for text similarity and object detection projects.'
             : 'จัดเตรียมและทำความสะอาดข้อมูล (Labeling Datasets) สำหรับโครงการตรวจสอบความคล้ายคลึงของข้อความและการตรวจจับวัตถุ',
         },
         {
-          title: lang === 'en' ? 'Cloud Utilization' : 'การใช้งานระบบคลาวด์',
           desc: lang === 'en'
             ? 'Utilized AWS services (including data management) to support project requirements.'
             : 'ใช้งานบริการ AWS (รวมถึงระบบการจัดการข้อมูล) เพื่อสนับสนุนโครงการและระบบงานต่างๆ',
         },
         {
-          title: lang === 'en' ? 'Model Evaluation' : 'การประเมินประสิทธิภาพโมเดล',
           desc: lang === 'en'
             ? 'Collaborated to test and evaluate AI/ML models (ResNet50, Mobile NetV3).'
             : 'ร่วมทดสอบและประเมินผลประสิทธิภาพของโมเดล AI/ML (ResNet50, Mobile NetV3)',
         },
         {
-          title: lang === 'en' ? 'Predictive Analysis' : 'การวิเคราะห์เชิงพยากรณ์',
           desc: lang === 'en'
             ? 'Trained and evaluated machine learning models for predictive analysis.'
             : 'ฝึกสอนและประเมินผลโมเดล Machine Learning สำหรับการวิเคราะห์เชิงพยากรณ์ข้อมูล',
@@ -138,22 +119,18 @@ const App = () => {
       company: lang === 'en' ? 'CP ALL Public Company Limited' : 'บริษัท ซีพี ออลล์ จำกัด (มหาชน)',
       role: lang === 'en' ? 'Customer Service & Sales Intern' : 'นักศึกษาฝึกงานด้านบริการลูกค้าและฝ่ายขาย',
       duration: lang === 'en' ? 'MARCH - MAY 2024' : 'มีนาคม - พฤษภาคม 2567',
-      logo: '🏪',
       tasks: [
         {
-          title: lang === 'en' ? 'Customer Service' : 'การบริการลูกค้า',
           desc: lang === 'en'
             ? 'Provided front-line customer service, efficiently addressing inquiries to ensure a positive customer experience.'
             : 'ให้บริการลูกค้าหน้าร้าน ให้คำแนะนำและแก้ไขปัญหาต่างๆ เพื่อสร้างประสบการณ์ที่ดีให้กับลูกค้า',
         },
         {
-          title: lang === 'en' ? 'Store Operations' : 'การจัดการภายในร้าน',
           desc: lang === 'en'
             ? 'Managed daily store operations, including stock checks, product sorting, and counter service.'
             : 'บริหารจัดการงานภายในร้านประจำวัน รวมถึงการตรวจเช็คสต็อกสินค้า การจัดเรียงสินค้า และการบริการเคาน์เตอร์แคชเชียร์',
         },
         {
-          title: lang === 'en' ? 'Multitasking & Efficiency' : 'การทำงานหลากหลายและการจัดเวลา',
           desc: lang === 'en'
             ? 'Handled various operational tasks (cleaning, product delivery, cafe duties), demonstrating strong organizational and time management skills.'
             : 'ปฏิบัติงานต่างๆ ร่วมกัน (ทำความสะอาด จัดส่งสินค้า ทำงานในส่วนคาเฟ่) แสดงให้เห็นถึงทักษะการจัดระเบียบงานและการบริหารเวลาที่ดีเยี่ยม',
@@ -174,13 +151,20 @@ const App = () => {
 
   const projects = [
     {
+      title: 'Manga Web Translator',
+      titleTh: 'โปรแกรมแปลภาษาบนหน้าเว็บเวลาอ่านมังงะ',
+      desc: 'Developed a Manifest V3 Chrome Extension that translates manga speech bubbles directly on target web pages. Supports local Tesseract.js OCR and multimodal Gemini 1.5 Flash translations.',
+      descTh: 'พัฒนาส่วนขยาย Chrome Extension (Manifest V3) สำหรับลากครอบตัดและแปลภาษาบนหน้าเว็บเวลาอ่านมังงะเป็นภาษาไทยโดยตรง รองรับทั้งระบบโลคัล OCR (Tesseract.js) และโมเดลปัญญาประดิษฐ์วิเคราะห์ภาพหลายรูปแบบ Gemini 1.5 Flash',
+      tags: ['Chrome Extension', 'Manifest V3', 'Tesseract.js OCR', 'Gemini AI', 'JavaScript'],
+      link: 'https://github.com/hamsmart1/Manga-Web-Translator',
+    },
+    {
       title: 'Grocery Store Management System',
       titleTh: 'ระบบบริหารจัดการร้านค้าของชำ',
       desc: 'Led a project to design and build a complete desktop application in Java. Personally coded 100% of the functionality, designed the database, mapped the flowcharts, and engineered the GUI.',
       descTh: 'ทำหน้าที่เป็นหัวหน้าโครงการและออกแบบพัฒนาระบบบริหารจัดการร้านค้าของชำด้วยภาษา Java คีย์ความสำเร็จคือการเขียนโค้ดเอง 100% วางแผนผังโครงสร้างฐานข้อมูล และออกแบบส่วนต่อประสานกราฟิก (GUI) ทั้งหมด',
       tags: ['Java', 'Java Swing', 'Database Design', 'Software Engineering'],
       link: 'https://github.com/hamsmart1/Grocery-Store-Project-with-JAVA-CLASS-Complete-',
-      icon: '🛒'
     },
     {
       title: 'PosturePal Demo',
@@ -189,16 +173,14 @@ const App = () => {
       descTh: 'พัฒนาเดโมแอปพลิเคชันช่วยตรวจจับท่านั่งและการจัดสรีระทางร่างกายในการนั่งทำงาน เพื่อส่งเสริมการบริหารการยศาสตร์ (Ergonomics) และป้องกันโรคออฟฟิศซินโดรม',
       tags: ['Python', 'Computer Vision', 'Ergonomics', 'UI Design'],
       link: 'https://github.com/hamsmart1/posturepal-demo',
-      icon: '🧘'
     },
     {
       title: 'PC SHOP Ecommerce Website',
       titleTh: 'เว็บไซต์อีคอมเมิร์ซ PC SHOP',
-      desc: 'Developed a full online storefront for computer hardware sales. Includes dynamic catalog browsing and standard order flow designs.',
-      descTh: 'พัฒนาระบบร้านค้าออนไลน์และจัดจำหน่ายอุปกรณ์คอมพิวเตอร์แบบอีคอมเมิร์ซ รวมถึงการจัดแสดงแค็ตตาล็อกสินค้าและการออกแบบระบบตะกร้าสั่งซื้อแบบไดนามิก',
+      desc: 'Developed a full online storefront for computer hardware sales. Includes catalog browsing and shopping cart flows.',
+      descTh: 'พัฒนาระบบร้านค้าออนไลน์และจัดจำหน่ายอุปกรณ์คอมพิวเตอร์แบบอีคอมเมิร์ซ รวมถึงการจัดแสดงแค็ตตาล็อกสินค้าและการออกแบบระบบตะกร้าสั่งซื้อ',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'E-Commerce'],
       link: 'https://github.com/hamsmart1/PCSHOP',
-      icon: '💻'
     },
     {
       title: 'MyColoringBook Application',
@@ -207,322 +189,328 @@ const App = () => {
       descTh: 'ออกแบบและพัฒนาระบบสมุดภาพระบายสีจำลองเพื่อการเรียนรู้ มีฟังก์ชันในการสลับถังสีและการปรับจานสีได้อย่างลื่นไหลบนบอร์ดแสดงผลที่เป็นระบบตอบสนองหน้าจอ',
       tags: ['Java', 'Graphic GUI', 'Canvas API', 'Software Development'],
       link: 'https://github.com/hamsmart1/MyColoringBook',
-      icon: '🎨'
     }
   ];
 
   const skillCategories = [
     {
-      title: t.skillsTitle + ' (Technical Skills)',
+      title: 'Technical Skills',
+      titleTh: 'ทักษะด้านเทคนิค',
       skills: [
-        { name: 'Python', level: t.levelProficient },
-        { name: 'Java', level: t.levelProficient },
-        { name: 'HTML & CSS', level: t.levelProficient },
-        { name: 'JavaScript (React)', level: t.levelIntermediate },
-        { name: 'MySQL', level: t.levelIntermediate },
-        { name: 'Agile Software Development', level: t.levelIntermediate },
-        { name: 'System Troubleshooting', level: t.levelAdvanced },
-        { name: 'System Maintenance', level: t.levelAdvanced },
-        { name: 'Basic Networking', level: t.levelIntermediate },
+        { name: 'Python', level: 'Proficient' },
+        { name: 'Java', level: 'Proficient' },
+        { name: 'HTML & CSS', level: 'Proficient' },
+        { name: 'JavaScript (React)', level: 'Intermediate' },
+        { name: 'MySQL', level: 'Intermediate' },
+        { name: 'Agile Software Dev', level: 'Intermediate' },
+        { name: 'System Troubleshooting', level: 'Advanced' },
+        { name: 'System Maintenance', level: 'Advanced' },
+        { name: 'Basic Networking', level: 'Intermediate' },
       ],
     },
     {
-      title: lang === 'en' ? 'Specialized AI & Data Knowledge' : 'ความรู้เฉพาะทางด้าน AI & Data',
+      title: 'Specialized AI & Data',
+      titleTh: 'ความเชี่ยวชาญ AI & ข้อมูล',
       skills: [
-        { name: 'Optical Character Recognition (OCR)', level: t.levelAdvanced },
-        { name: 'Object Detection', level: t.levelIntermediate },
-        { name: 'Text Similarity & NLP', level: t.levelIntermediate },
-        { name: 'Model Evaluation (ResNet50, MobileNetV3)', level: t.levelIntermediate },
-        { name: 'AWS Services', level: t.levelIntermediate },
+        { name: 'Optical Character Recognition (OCR)', level: 'Advanced' },
+        { name: 'Object Detection', level: 'Intermediate' },
+        { name: 'Text Similarity & NLP', level: 'Intermediate' },
+        { name: 'Model Evaluation', level: 'Intermediate' },
+        { name: 'AWS Services', level: 'Intermediate' },
       ],
     },
     {
-      title: lang === 'en' ? 'Soft Skills & Languages' : 'ทักษะส่วนบุคคลและภาษา',
+      title: 'Soft Skills & Languages',
+      titleTh: 'ทักษะส่วนบุคคลและภาษา',
       skills: [
-        { name: lang === 'en' ? 'Thai' : 'ภาษาไทย', level: t.levelNative },
-        { name: lang === 'en' ? 'English' : 'ภาษาอังกฤษ', level: t.levelGood },
-        { name: lang === 'en' ? 'Teamwork & Collaboration' : 'การทำงานร่วมกันเป็นทีม', level: t.levelAdvanced },
-        { name: lang === 'en' ? 'Problem-Solving' : 'การแก้ไขปัญหาเฉพาะหน้า', level: t.levelAdvanced },
-        { name: lang === 'en' ? 'Time Management' : 'การบริหารเวลา', level: t.levelAdvanced },
-        { name: lang === 'en' ? 'Customer Service' : 'การบริการลูกค้า', level: t.levelAdvanced },
+        { name: lang === 'en' ? 'Thai' : 'ภาษาไทย', level: 'Native' },
+        { name: lang === 'en' ? 'English' : 'ภาษาอังกฤษ', level: 'CEFR C1' },
+        { name: lang === 'en' ? 'Collaboration' : 'การทำงานร่วมกัน', level: 'Advanced' },
+        { name: lang === 'en' ? 'Problem-Solving' : 'การแก้ปัญหา', level: 'Advanced' },
+        { name: lang === 'en' ? 'Time Management' : 'การจัดสรรเวลา', level: 'Advanced' },
+        { name: lang === 'en' ? 'Customer Service' : 'การบริการลูกค้า', level: 'Advanced' },
       ],
     },
   ];
 
   const downloadFiles = [
     {
-      name: lang === 'en' ? 'Professional Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
+      name: lang === 'en' ? 'Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
       path: '/files/Resume_PRO.pdf',
-      icon: '📄',
-      desc: lang === 'en' ? 'Standard professional resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
+      desc: lang === 'en' ? 'Official standard resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
       type: 'download'
     },
     {
       name: lang === 'en' ? 'Infographic Resume (PDF)' : 'เรซูเม่รูปแบบอินโฟกราฟิก (PDF)',
       path: '/files/Resume_infoGraphic.pdf',
-      icon: '🎨',
       desc: lang === 'en' ? 'Visual infographics resume layout.' : 'รูปแบบเรซูเม่ที่เน้นกราฟิกและสีสันสวยงาม',
       type: 'download'
     },
     {
       name: lang === 'en' ? 'Full Portfolio (PDF)' : 'แฟ้มสะสมผลงานฉบับเต็ม (PDF)',
       path: '/files/Portfolio.pdf',
-      icon: '💼',
       desc: lang === 'en' ? 'Project showcase and certificates collection.' : 'การรวบรวมผลงานโครงการและเกียรติบัตรต่างๆ',
       type: 'download'
     },
     {
       name: lang === 'en' ? 'CEFR C1 Certificate (PDF)' : 'ใบรับรองระดับภาษาอังกฤษ CEFR C1 (PDF)',
       path: '/files/CEFR_C1.pdf',
-      icon: '🇬🇧',
       desc: lang === 'en' ? 'Official English language proficiency certificate.' : 'ใบรับรองความสามารถทางภาษาอังกฤษระดับ C1 อย่างเป็นทางการ',
       type: 'download'
     },
     {
       name: lang === 'en' ? 'Academic Transcript' : 'ใบแสดงผลการเรียน (Transcript)',
       path: 'mailto:hamsmart47@gmail.com?subject=Request for Academic Transcript - Nonrawit Yodthong',
-      icon: '🏫',
       desc: lang === 'en' ? 'Official transcripts are available upon request.' : 'ใบแสดงผลการเรียนอย่างเป็นทางการ (สามารถติดต่อขอได้ผ่านทางอีเมล)',
       type: 'email'
     },
   ];
 
+  // Set active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'experience', 'education', 'projects', 'skills', 'downloads'];
+      const scrollPosition = window.scrollY + 200;
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="app-container">
-      <div className="glass-grid"></div>
-      
-      {/* Sidebar / Profile Area */}
-      <aside className="profile-sidebar">
-        <div className="sidebar-card neon-card">
-          {/* Language Switcher */}
-          <div className="language-switcher-container">
-            <div className="language-switcher">
-              <button 
-                className={`lang-btn ${lang === 'th' ? 'active' : ''}`}
-                onClick={() => setLang('th')}
-              >
-                TH
-              </button>
-              <button 
-                className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-                onClick={() => setLang('en')}
-              >
-                EN
-              </button>
-            </div>
+      {/* Sticky Left Sidebar */}
+      <aside className="sidebar">
+        <div>
+          {/* Language Switch */}
+          <div className="lang-switcher">
+            <button 
+              className={`lang-btn ${lang === 'th' ? 'active' : ''}`}
+              onClick={() => setLang('th')}
+            >
+              TH
+            </button>
+            <button 
+              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+              onClick={() => setLang('en')}
+            >
+              EN
+            </button>
           </div>
 
-          <div className="profile-img-container">
-            <img src={contactInfo.profileImg} alt={contactInfo.name} className="profile-image glow-profile" />
+          {/* Profile Card */}
+          <div className="profile-image-container">
+            <img src={contactInfo.profileImg} alt={contactInfo.name} className="profile-image" />
           </div>
-          
-          <h1 className="name neon-text">{contactInfo.name}</h1>
+          <h1 className="name">{contactInfo.name}</h1>
           <h2 className="title">{t.roleTitle}</h2>
-          
-          <div className="meta-info">
-            <p className="university">🎓 {education.institution}</p>
-            <p className="faculty">⚙️ {education.faculty}</p>
-            <p className="major">📚 {education.degree}</p>
-            <p className="address">📍 {contactInfo.address}</p>
-          </div>
 
-          <hr className="divider" />
-
-          <ul className="contact-list">
-            <li>
-              <span className="icon">📞</span>
-              <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
-            </li>
-            <li>
-              <span className="icon">✉️</span>
-              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-            </li>
-            <li>
-              <span className="icon">🔗</span>
-              <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">{t.linkedin}</a>
-            </li>
-            <li>
-              <span className="icon">🌳</span>
-              <a href={contactInfo.linktree} target="_blank" rel="noreferrer">{t.linktree}</a>
-            </li>
-          </ul>
-
-          <div className="quick-download-btn">
-            <a href="/files/Resume_PRO.pdf" download className="btn-primary-glow">
-              📥 {t.downloadResume}
+          {/* Sidebar Menu */}
+          <nav className="nav-menu">
+            <a 
+              href="#about" 
+              className={`nav-item ${activeSection === 'about' ? 'active' : ''}`}
+              onClick={() => setActiveSection('about')}
+            >
+              — {t.navAbout}
             </a>
+            <a 
+              href="#experience" 
+              className={`nav-item ${activeSection === 'experience' ? 'active' : ''}`}
+              onClick={() => setActiveSection('experience')}
+            >
+              — {t.navExperience}
+            </a>
+            <a 
+              href="#education" 
+              className={`nav-item ${activeSection === 'education' ? 'active' : ''}`}
+              onClick={() => setActiveSection('education')}
+            >
+              — {t.navEducation}
+            </a>
+            <a 
+              href="#projects" 
+              className={`nav-item ${activeSection === 'projects' ? 'active' : ''}`}
+              onClick={() => setActiveSection('projects')}
+            >
+              — {t.navProjects}
+            </a>
+            <a 
+              href="#skills" 
+              className={`nav-item ${activeSection === 'skills' ? 'active' : ''}`}
+              onClick={() => setActiveSection('skills')}
+            >
+              — {t.navSkills}
+            </a>
+            <a 
+              href="#downloads" 
+              className={`nav-item ${activeSection === 'downloads' ? 'active' : ''}`}
+              onClick={() => setActiveSection('downloads')}
+            >
+              — {t.navDownloads}
+            </a>
+          </nav>
+        </div>
+
+        {/* Sidebar Footer */}
+        <div className="sidebar-footer">
+          <div className="contact-info">
+            <span>📍 {contactInfo.address}</span>
+            <span>✉️ <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></span>
+            <span>📞 <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></span>
+          </div>
+          <div className="social-links">
+            <a href={contactInfo.linkedin} target="_blank" rel="noreferrer" className="social-link">LINKEDIN</a>
+            <a href={contactInfo.linktree} target="_blank" rel="noreferrer" className="social-link">LINKTREE</a>
           </div>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className="content-area">
-        <nav className="tab-navigation neon-nav">
-          <button 
-            className={`tab-btn ${activeTab === 'experience' ? 'active' : ''}`}
-            onClick={() => setActiveTab('experience')}
-          >
-            {t.tabExperience}
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'education' ? 'active' : ''}`}
-            onClick={() => setActiveTab('education')}
-          >
-            {t.tabEducation}
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
-            onClick={() => setActiveTab('projects')}
-          >
-            {t.tabProjects}
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
-            onClick={() => setActiveTab('skills')}
-          >
-            {t.tabSkills}
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'downloads' ? 'active' : ''}`}
-            onClick={() => setActiveTab('downloads')}
-          >
-            {t.tabDownloads}
-          </button>
-        </nav>
+      <main className="main-content">
+        {/* About Section */}
+        <section id="about" className="section">
+          <div className="section-header">
+            <span className="section-num">01 /</span>
+            <h3 className="section-title">{lang === 'en' ? 'About Me' : 'เกี่ยวกับฉัน'}</h3>
+          </div>
+          <p className="intro-text">
+            {lang === 'en' ? t.aboutText : t.aboutTextTh}
+          </p>
+        </section>
 
-        <div className="tab-content-container glass-card">
-          {/* Work Experience Tab */}
-          {activeTab === 'experience' && (
-            <section className="tab-pane active-pane fade-in">
-              <h3 className="section-title">{t.experienceTitle}</h3>
-              <div className="timeline">
-                {experience.map((exp, idx) => (
-                  <div className="timeline-item animate-item" key={idx} style={{ animationDelay: `${idx * 0.1}s` }}>
-                    <div className="timeline-badge">{exp.logo}</div>
-                    <div className="timeline-card">
-                      <div className="card-header-flex">
-                        <div>
-                          <h4 className="role-title">{exp.role}</h4>
-                          <h5 className="company-title">{exp.company}</h5>
-                        </div>
-                        <span className="duration-badge">{exp.duration}</span>
-                      </div>
-                      <ul className="task-list">
-                        {exp.tasks.map((task, tIdx) => (
-                          <li key={tIdx}>
-                            <strong>{task.title}:</strong> {task.desc}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Education Tab */}
-          {activeTab === 'education' && (
-            <section className="tab-pane active-pane fade-in">
-              <h3 className="section-title">{t.educationTitle}</h3>
-              <div className="education-card">
-                <div className="edu-header">
-                  <div className="edu-icon">🏫</div>
-                  <div>
-                    <h4>{education.institution}</h4>
-                    <h5>{education.degree}</h5>
-                    <p className="edu-meta">{education.faculty} | {education.duration}</p>
-                  </div>
-                </div>
-                <div className="gpax-display-card glow-border">
-                  <span className="gpax-label">{t.gpaxLabel}</span>
-                  <span className="gpax-value neon-glow-text">{education.gpax}</span>
-                  <span className="gpax-desc">{t.outstanding}</span>
+        {/* Work Experience Section */}
+        <section id="experience" className="section">
+          <div className="section-header">
+            <span className="section-num">02 /</span>
+            <h3 className="section-title">{t.experienceTitle}</h3>
+          </div>
+          <div className="experience-list">
+            {experience.map((exp, idx) => (
+              <div className="experience-item" key={idx}>
+                <div className="exp-time">{exp.duration}</div>
+                <div className="exp-details">
+                  <h4>{exp.role}</h4>
+                  <div className="exp-company">{exp.company}</div>
+                  <ul className="exp-tasks">
+                    {exp.tasks.map((task, tIdx) => (
+                      <li key={tIdx}>{task.desc}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </section>
-          )}
+            ))}
+          </div>
+        </section>
 
-          {/* Projects Tab (God-tier addition) */}
-          {activeTab === 'projects' && (
-            <section className="tab-pane active-pane fade-in">
-              <h3 className="section-title">{t.projectsTitle}</h3>
-              <div className="projects-grid">
-                {projects.map((proj, idx) => (
-                  <div className="project-card animate-item" key={idx} style={{ animationDelay: `${idx * 0.15}s` }}>
-                    <div className="project-card-header">
-                      <div className="project-icon">{proj.icon}</div>
-                      <div>
-                        <h4>{lang === 'en' ? proj.title : proj.titleTh}</h4>
-                        <div className="project-tags">
-                          {proj.tags.map((tag, tIdx) => (
-                            <span className="project-tag" key={tIdx}>{tag}</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <p className="project-desc">{lang === 'en' ? proj.desc : proj.descTh}</p>
-                    <div className="project-footer">
-                      <a href={proj.link} target="_blank" rel="noreferrer" className="btn-project-link">
-                        🐙 {t.sourceCode}
-                      </a>
-                    </div>
-                  </div>
-                ))}
+        {/* Education Section */}
+        <section id="education" className="section">
+          <div className="section-header">
+            <span className="section-num">03 /</span>
+            <h3 className="section-title">{t.educationTitle}</h3>
+          </div>
+          <div className="edu-block">
+            <div className="edu-time">{education.duration}</div>
+            <div className="edu-details">
+              <h4>{education.institution}</h4>
+              <h5>{education.degree} ({education.faculty})</h5>
+              <div className="edu-gpax-box">
+                <span className="gpax-val">{education.gpax}</span>
+                <span className="gpax-lbl">{t.gpaxLabel}</span>
               </div>
-            </section>
-          )}
+            </div>
+          </div>
+        </section>
 
-          {/* Skills Tab */}
-          {activeTab === 'skills' && (
-            <section className="tab-pane active-pane fade-in">
-              <h3 className="section-title">{t.skillsTitle}</h3>
-              <div className="skills-grid">
-                {skillCategories.map((cat, idx) => (
-                  <div className="skills-category-card" key={idx}>
-                    <h4 className="category-title">{cat.title}</h4>
-                    <div className="skills-badges">
-                      {cat.skills.map((skill, sIdx) => (
-                        <div className="skill-badge" key={sIdx}>
-                          <span className="skill-name">{skill.name}</span>
-                          <span className="skill-level">{skill.level}</span>
-                        </div>
-                      ))}
-                    </div>
+        {/* Projects Section */}
+        <section id="projects" className="section">
+          <div className="section-header">
+            <span className="section-num">04 /</span>
+            <h3 className="section-title">{t.projectsTitle}</h3>
+          </div>
+          <div className="projects-grid">
+            {projects.map((proj, idx) => (
+              <div className="project-row" key={idx}>
+                <div className="project-main">
+                  <h4>{lang === 'en' ? proj.title : proj.titleTh}</h4>
+                  <p className="project-desc">{lang === 'en' ? proj.desc : proj.descTh}</p>
+                  <div className="project-tags">
+                    {proj.tags.map((tag, tIdx) => (
+                      <span className="project-tag" key={tIdx}>{tag}</span>
+                    ))}
                   </div>
-                ))}
+                </div>
+                <div className="project-action">
+                  <a href={proj.link} target="_blank" rel="noreferrer" className="btn-project">
+                    {t.sourceCode} →
+                  </a>
+                </div>
               </div>
-            </section>
-          )}
+            ))}
+          </div>
+        </section>
 
-          {/* Downloads Tab */}
-          {activeTab === 'downloads' && (
-            <section className="tab-pane active-pane fade-in">
-              <h3 className="section-title">{t.downloadsTitle}</h3>
-              <p className="section-desc">{t.downloadsDesc}</p>
-              <div className="downloads-grid">
-                {downloadFiles.map((file, idx) => (
-                  <div className="download-card" key={idx}>
-                    <div className="download-icon-box">{file.icon}</div>
-                    <div className="download-info">
-                      <h4>{file.name}</h4>
-                      <p>{file.desc}</p>
+        {/* Skills Section */}
+        <section id="skills" className="section">
+          <div className="section-header">
+            <span className="section-num">05 /</span>
+            <h3 className="section-title">{t.skillsTitle}</h3>
+          </div>
+          <div className="skills-container">
+            {skillCategories.map((cat, idx) => (
+              <div className="skill-group" key={idx}>
+                <h4>{lang === 'en' ? cat.title : cat.titleTh}</h4>
+                <div className="skill-list">
+                  {cat.skills.map((skill, sIdx) => (
+                    <div className="skill-card" key={sIdx}>
+                      <span className="skill-name">{skill.name}</span>
+                      <span className="skill-level">{skill.level}</span>
                     </div>
-                    {file.type === 'email' ? (
-                      <a href={file.path} className="btn-download btn-request">
-                        {t.requestTrans}
-                      </a>
-                    ) : (
-                      <a href={file.path} download className="btn-download">
-                        {t.downloadBtnText}
-                      </a>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </section>
-          )}
-        </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Downloads Section */}
+        <section id="downloads" className="section">
+          <div className="section-header">
+            <span className="section-num">06 /</span>
+            <h3 className="section-title">{t.downloadsTitle}</h3>
+          </div>
+          <div className="downloads-list">
+            {downloadFiles.map((file, idx) => (
+              <div className="download-row" key={idx}>
+                <div className="download-info">
+                  <h4>{file.name}</h4>
+                  <p>{file.desc}</p>
+                </div>
+                {file.type === 'email' ? (
+                  <a href={file.path} className="btn-download btn-email">
+                    {t.requestTrans}
+                  </a>
+                ) : (
+                  <a href={file.path} download className="btn-download">
+                    {t.downloadBtnText}
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
