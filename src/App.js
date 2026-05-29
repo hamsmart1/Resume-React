@@ -184,7 +184,7 @@ const App = () => {
       desc: 'Developed a Manifest V3 Chrome Extension that translates manga speech bubbles directly on target web pages. Supports local Tesseract.js OCR and multimodal Gemini 1.5 Flash translations.',
       descTh: 'พัฒนาส่วนขยาย Chrome Extension (Manifest V3) สำหรับลากครอบตัดและแปลภาษาบนหน้าเว็บเวลาอ่านมังงะเป็นภาษาไทยโดยตรง รองรับทั้งระบบโลคัล OCR (Tesseract.js) และโมเดลปัญญาประดิษฐ์วิเคราะห์ภาพหลายรูปแบบ Gemini 1.5 Flash',
       tags: ['Chrome Extension', 'Manifest V3', 'Tesseract.js OCR', 'Gemini AI', 'JavaScript'],
-      link: 'https://github.com/hamsmart1/Resume-React',
+      link: 'https://github.com/hamsmart1/Manga-Web-Translator',
       icon: '📖'
     },
     {
