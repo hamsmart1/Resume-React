@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
   const [lang, setLang] = useState('th'); // Default to Thai language
   const [activeTab, setActiveTab] = useState('experience');
+  const [showContact, setShowContact] = useState(false);
 
   const translations = {
     en: {
@@ -23,7 +24,7 @@ const App = () => {
       tabProjects: '🚀 Projects',
       tabSkills: '⚡ Skills',
       tabDownloads: '📥 Documents',
-      experienceTitle: 'Professional Experience',
+      experienceTitle: 'Work Experience',
       educationTitle: 'Education History',
       projectsTitle: 'Featured Projects',
       skillsTitle: 'Skills & Competencies',
@@ -43,6 +44,8 @@ const App = () => {
       sourceCode: 'View Source',
       requestTrans: 'Request',
       requestDoc: 'Request Academic Transcript',
+      showContact: 'Show Contact & Socials',
+      hideContact: 'Hide Contact Details',
     },
     th: {
       availableForHire: 'พร้อมร่วมสร้างสรรค์ผลงาน',
@@ -80,6 +83,8 @@ const App = () => {
       sourceCode: 'ดูโค้ดผลงาน',
       requestTrans: 'ขอเอกสาร',
       requestDoc: 'ติดต่อขอใบแสดงผลการเรียน',
+      showContact: 'แสดงช่องทางการติดต่อและโซเชียล',
+      hideContact: 'ซ่อนข้อมูลการติดต่อ',
     }
   };
 
@@ -251,10 +256,10 @@ const App = () => {
 
   const downloadFiles = [
     {
-      name: lang === 'en' ? 'Professional Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
+      name: lang === 'en' ? 'Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
       path: '/files/Resume_PRO.pdf',
       icon: '📄',
-      desc: lang === 'en' ? 'Standard professional resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
+      desc: lang === 'en' ? 'Standard resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
       type: 'download'
     },
     {
@@ -326,31 +331,40 @@ const App = () => {
             <p className="address">📍 {contactInfo.address}</p>
           </div>
 
-          <hr className="divider" />
+          <button 
+            className="mobile-contact-toggle"
+            onClick={() => setShowContact(!showContact)}
+          >
+            {showContact ? t.hideContact : t.showContact}
+          </button>
 
-          <ul className="contact-list">
-            <li>
-              <span className="icon">📞</span>
-              <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
-            </li>
-            <li>
-              <span className="icon">✉️</span>
-              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-            </li>
-            <li>
-              <span className="icon">🔗</span>
-              <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">{t.linkedin}</a>
-            </li>
-            <li>
-              <span className="icon">🌳</span>
-              <a href={contactInfo.linktree} target="_blank" rel="noreferrer">{t.linktree}</a>
-            </li>
-          </ul>
+          <div className={`collapsible-contact ${showContact ? 'expanded' : ''}`}>
+            <hr className="divider" />
 
-          <div className="quick-download-btn">
-            <a href="/files/Resume_PRO.pdf" download className="btn-primary-glow">
-              📥 {t.downloadResume}
-            </a>
+            <ul className="contact-list">
+              <li>
+                <span className="icon">📞</span>
+                <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+              </li>
+              <li>
+                <span className="icon">✉️</span>
+                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+              </li>
+              <li>
+                <span className="icon">🔗</span>
+                <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">{t.linkedin}</a>
+              </li>
+              <li>
+                <span className="icon">🌳</span>
+                <a href={contactInfo.linktree} target="_blank" rel="noreferrer">{t.linktree}</a>
+              </li>
+            </ul>
+
+            <div className="quick-download-btn">
+              <a href="/files/Resume_PRO.pdf" download className="btn-primary-glow">
+                📥 {t.downloadResume}
+              </a>
+            </div>
           </div>
         </div>
       </aside>
