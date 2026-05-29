@@ -1,71 +1,74 @@
-# 🎯 Executive Resume & Portfolio — Nonrawit Yodthong
+โหลดไฟล์ทั้งหมดก่อนนะคับ และ
+โหลด npm install บนคำสั่ง Terminal หลังเปิดไฟล์
+แล้วรันด้วย npm start บนคำสั่ง Terminal
+(ผมเขียนด้วย VsCode คับ )
+# Getting Started with Create React App
 
-> **Executive Corporate Resume** — A modern, professional portfolio website built with **React.js**
->
-> เว็บ Resume สไตล์ Executive Corporate Clean ธีม Midnight Blue & Gold
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
-![CSS3](https://img.shields.io/badge/CSS3-Premium_Design-1572B6?logo=css3&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
+## Available Scripts
 
-## ✨ Features
+In the project directory, you can run:
 
-- 🌙 **Dark & Light Theme** — Executive Midnight Blue / Corporate Clean White
-- 🌐 **Bilingual Support** — Thai (TH) / English (EN) toggle
-- 📊 **KPI Dashboard** — GPAX, CEFR, AI Projects, Code Integrity
-- 🗂️ **Interactive Projects** — Search, filter by category (AI, Software, Web)
-- 📋 **Professional Timeline** — Filterable work experience (Technical / Business)
-- 🎓 **Education Section** — Degree & GPAX display
-- 📥 **Document Downloads** — Resume PDF, Portfolio, CEFR Certificate
-- 📬 **Contact Form** — Inquiry submission with toast notifications
-- 📱 **Fully Responsive** — Mobile-first, tablet, desktop
+### `npm start`
 
-## 🚀 Quick Start
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```bash
-# Clone the repository
-git clone https://github.com/hamsmart1/Resume-React.git
-cd Resume-React
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-# Install dependencies
-npm install
+### `npm test`
 
-# Start development server
-npm start
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Open [http://localhost:3000](http://localhost:3000) to view in browser.
+### `npm run build`
 
-## 🛠️ Tech Stack
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-| Technology | Usage |
-|---|---|
-| React 18 | UI Framework |
-| CSS3 Custom Properties | Theming & Animations |
-| Google Fonts | Plus Jakarta Sans, Playfair Display |
-| Bootstrap 5 | Base Grid System |
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## 📂 Project Structure
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```
-Resume-React/
-├── public/
-│   ├── files/          # PDF downloads (Resume, Portfolio, CEFR)
-│   └── index.html
-├── src/
-│   ├── App.js          # Main application component
-│   ├── App.css         # Complete styling & theme system
-│   ├── index.js        # React entry point
-│   └── index.css       # Base styles
-├── package.json
-└── README.md
-```
+### `npm run eject`
 
-## 📄 License
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-MIT License — Feel free to use as inspiration for your own portfolio.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
----
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-**Built with ❤️ by Nonrawit Yodthong**
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
