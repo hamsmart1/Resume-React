@@ -179,6 +179,15 @@ const App = () => {
 
   const projects = [
     {
+      title: 'Manga Web Translator',
+      titleTh: 'โปรแกรมแปลภาษาบนหน้าเว็บเวลาอ่านมังงะ',
+      desc: 'Developed a Manifest V3 Chrome Extension that translates manga speech bubbles directly on target web pages. Supports local Tesseract.js OCR and multimodal Gemini 1.5 Flash translations.',
+      descTh: 'พัฒนาส่วนขยาย Chrome Extension (Manifest V3) สำหรับลากครอบตัดและแปลภาษาบนหน้าเว็บเวลาอ่านมังงะเป็นภาษาไทยโดยตรง รองรับทั้งระบบโลคัล OCR (Tesseract.js) และโมเดลปัญญาประดิษฐ์วิเคราะห์ภาพหลายรูปแบบ Gemini 1.5 Flash',
+      tags: ['Chrome Extension', 'Manifest V3', 'Tesseract.js OCR', 'Gemini AI', 'JavaScript'],
+      link: 'https://github.com/hamsmart1/Resume-React',
+      icon: '📖'
+    },
+    {
       title: 'Grocery Store Management System',
       titleTh: 'ระบบบริหารจัดการร้านค้าของชำ',
       desc: 'Led a project to design and build a complete desktop application in Java. Personally coded 100% of the functionality, designed the database, mapped the flowcharts, and engineered the GUI.',
