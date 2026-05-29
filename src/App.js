@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
   const [lang, setLang] = useState('th'); // Default to Thai language
   const [activeTab, setActiveTab] = useState('experience');
-  const [showContact, setShowContact] = useState(false);
 
   const translations = {
     en: {
@@ -24,7 +23,7 @@ const App = () => {
       tabProjects: '🚀 Projects',
       tabSkills: '⚡ Skills',
       tabDownloads: '📥 Documents',
-      experienceTitle: 'Work Experience',
+      experienceTitle: 'Professional Experience',
       educationTitle: 'Education History',
       projectsTitle: 'Featured Projects',
       skillsTitle: 'Skills & Competencies',
@@ -44,8 +43,6 @@ const App = () => {
       sourceCode: 'View Source',
       requestTrans: 'Request',
       requestDoc: 'Request Academic Transcript',
-      showContact: 'Show Contact & Socials',
-      hideContact: 'Hide Contact Details',
     },
     th: {
       availableForHire: 'พร้อมร่วมสร้างสรรค์ผลงาน',
@@ -83,8 +80,6 @@ const App = () => {
       sourceCode: 'ดูโค้ดผลงาน',
       requestTrans: 'ขอเอกสาร',
       requestDoc: 'ติดต่อขอใบแสดงผลการเรียน',
-      showContact: 'แสดงช่องทางการติดต่อและโซเชียล',
-      hideContact: 'ซ่อนข้อมูลการติดต่อ',
     }
   };
 
@@ -179,15 +174,6 @@ const App = () => {
 
   const projects = [
     {
-      title: 'Manga Web Translator',
-      titleTh: 'โปรแกรมแปลภาษาบนหน้าเว็บเวลาอ่านมังงะ',
-      desc: 'Developed a Manifest V3 Chrome Extension that translates manga speech bubbles directly on target web pages. Supports local Tesseract.js OCR and multimodal Gemini 1.5 Flash translations.',
-      descTh: 'พัฒนาส่วนขยาย Chrome Extension (Manifest V3) สำหรับลากครอบตัดและแปลภาษาบนหน้าเว็บเวลาอ่านมังงะเป็นภาษาไทยโดยตรง รองรับทั้งระบบโลคัล OCR (Tesseract.js) และโมเดลปัญญาประดิษฐ์วิเคราะห์ภาพหลายรูปแบบ Gemini 1.5 Flash',
-      tags: ['Chrome Extension', 'Manifest V3', 'Tesseract.js OCR', 'Gemini AI', 'JavaScript'],
-      link: 'https://github.com/hamsmart1/Manga-Web-Translator',
-      icon: '📖'
-    },
-    {
       title: 'Grocery Store Management System',
       titleTh: 'ระบบบริหารจัดการร้านค้าของชำ',
       desc: 'Led a project to design and build a complete desktop application in Java. Personally coded 100% of the functionality, designed the database, mapped the flowcharts, and engineered the GUI.',
@@ -265,10 +251,10 @@ const App = () => {
 
   const downloadFiles = [
     {
-      name: lang === 'en' ? 'Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
+      name: lang === 'en' ? 'Professional Resume (PDF)' : 'เรซูเม่อย่างเป็นทางการ (PDF)',
       path: '/files/Resume_PRO.pdf',
       icon: '📄',
-      desc: lang === 'en' ? 'Standard resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
+      desc: lang === 'en' ? 'Standard professional resume layout.' : 'รูปแบบเรซูเม่ทางการที่เป็นมาตรฐานสากล',
       type: 'download'
     },
     {
@@ -340,40 +326,31 @@ const App = () => {
             <p className="address">📍 {contactInfo.address}</p>
           </div>
 
-          <button 
-            className="mobile-contact-toggle"
-            onClick={() => setShowContact(!showContact)}
-          >
-            {showContact ? t.hideContact : t.showContact}
-          </button>
+          <hr className="divider" />
 
-          <div className={`collapsible-contact ${showContact ? 'expanded' : ''}`}>
-            <hr className="divider" />
+          <ul className="contact-list">
+            <li>
+              <span className="icon">📞</span>
+              <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+            </li>
+            <li>
+              <span className="icon">✉️</span>
+              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+            </li>
+            <li>
+              <span className="icon">🔗</span>
+              <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">{t.linkedin}</a>
+            </li>
+            <li>
+              <span className="icon">🌳</span>
+              <a href={contactInfo.linktree} target="_blank" rel="noreferrer">{t.linktree}</a>
+            </li>
+          </ul>
 
-            <ul className="contact-list">
-              <li>
-                <span className="icon">📞</span>
-                <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
-              </li>
-              <li>
-                <span className="icon">✉️</span>
-                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-              </li>
-              <li>
-                <span className="icon">🔗</span>
-                <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">{t.linkedin}</a>
-              </li>
-              <li>
-                <span className="icon">🌳</span>
-                <a href={contactInfo.linktree} target="_blank" rel="noreferrer">{t.linktree}</a>
-              </li>
-            </ul>
-
-            <div className="quick-download-btn">
-              <a href="/files/Resume_PRO.pdf" download className="btn-primary-glow">
-                📥 {t.downloadResume}
-              </a>
-            </div>
+          <div className="quick-download-btn">
+            <a href="/files/Resume_PRO.pdf" download className="btn-primary-glow">
+              📥 {t.downloadResume}
+            </a>
           </div>
         </div>
       </aside>
